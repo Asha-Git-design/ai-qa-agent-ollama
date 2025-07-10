@@ -1,0 +1,9 @@
+{
+  "name": "Asha's Local Agent",
+  "type": "Manual Trigger",
+  "url": "http://localhost:5000/job/ai-qa-agent",
+  "buildName": "Login Smoke Test",
+  "buildOrder": "001",
+  "reportUrl": "http://localhost:5000/report",
+  "reportName": "Allure Smoke Report"
+}
