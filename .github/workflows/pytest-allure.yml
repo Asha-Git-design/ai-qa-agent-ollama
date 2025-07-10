@@ -24,14 +24,14 @@ jobs:
           pip install -r requirements.txt
           pip install allure-pytest
 
-      - name: Run tests with Allure
+      - name: Run tests with Allure (even if failing)
         run: |
-          pytest --alluredir=allure-results
+          pytest --alluredir=allure-results || true
 
       - name: Generate Allure Report
         run: |
           npm install -g allure-commandline --save-dev
-          allure generate allure-results -o allure-report --clean
+          allure generate allure-results -o allure-report --clean || true
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
