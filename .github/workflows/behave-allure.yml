@@ -1,0 +1,29 @@
+name: Run Behave Tests with Allure
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install behave allure-behave
+
+    - name: Run Behave Tests
+      run: behave -f allure_behave.formatter:AllureFormatter -o allure-results
+
+    - name: Upload Allure Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-results
+        path: allure-results
