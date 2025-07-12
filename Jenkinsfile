@@ -1,39 +1,42 @@
 pipeline {
     agent any
 
+    tools {
+        allure 'allure'
+    }
+
     stages {
         stage('Clone Repo') {
             steps {
-                // your steps here
+                git 'https://github.com/Asha-Git-design/ai-qa-agent-ollama.git'
             }
         }
 
         stage('Create Virtual Env') {
             steps {
-                // your steps here
+                bat 'python -m venv venv'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // your steps here
+                bat 'call venv\\Scripts\\activate && pip install -r requirements.txt'
             }
         }
 
         stage('Run Behave Tests') {
             steps {
-                // your steps here
+                bat 'call venv\\Scripts\\activate && behave > behave-output.txt'
             }
         }
 
         stage('Allure Report') {
             steps {
-                // already added steps to generate report
+                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
             }
         }
     }
 
-    // ✅ This goes here
     post {
         always {
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
