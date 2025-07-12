@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                // ✅ Specify branch explicitly to avoid "Couldn't find revision" error
                 git branch: 'main', url: 'https://github.com/Asha-Git-design/ai-qa-agent-ollama.git'
             }
         }
@@ -37,10 +36,5 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-        }
-    }
 }
+    
