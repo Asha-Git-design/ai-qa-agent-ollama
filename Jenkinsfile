@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/Asha-Git-design/ai-qa-agent-ollama.git'
+                // ✅ Specify branch explicitly to avoid "Couldn't find revision" error
+                git branch: 'main', url: 'https://github.com/Asha-Git-design/ai-qa-agent-ollama.git'
             }
         }
 
